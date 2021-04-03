@@ -14,6 +14,7 @@ if __name__ == "__main__":
     airport_value_keys = spark.read.option("header", True)\
                         .csv("Dataset/airports.csv").repartition(int(sys.argv[2])).rdd\
                         .map(lambda r: (r[5], 1))
+    
     res = airport_value_keys.reduceByKey(lambda a,b: a+b)
     tuples = res.collect()
     with open(sys.argv[1], 'w', newline = '') as csvfile:
