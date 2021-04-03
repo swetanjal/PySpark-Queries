@@ -11,7 +11,6 @@ if __name__ == "__main__":
             .builder\
             .appName("Number of Airports by Country")\
             .getOrCreate()
-    print(sc.defaultParallelism)
     airport_value_keys = spark.read.option("header", True)\
                         .csv("Dataset/airports.csv").rdd\
                         .map(lambda r: (r[5], 1))
