@@ -19,7 +19,7 @@ if __name__ == "__main__":
             .getOrCreate()
     
     res = spark.read.option("header", True)\
-                        .csv("Dataset/airports.csv").rdd\
+                        .csv("Dataset/airports.csv").repartition(int(sys.argv[2])).rdd\
                         .map(lambda x: (x[0], x[1], x[2], x[3], x[4], x[5]))\
                         .filter(selection)
     tuples = res.collect()

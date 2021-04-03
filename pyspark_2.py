@@ -16,11 +16,11 @@ if __name__ == "__main__":
 
     spark = SparkSession\
             .builder\
-            .appName("Number of Airports by Country")\
+            .appName("Country having the highest number of airports")\
             .getOrCreate()
     
     airport_value_keys = spark.read.option("header", True)\
-                        .csv("Dataset/airports.csv").rdd\
+                        .csv("Dataset/airports.csv").repartition(int(sys.argv[2])).rdd\
                         .map(lambda r: (r[5], 1))
     airport_counts = airport_value_keys.reduceByKey(lambda a,b: a+b)
     res = airport_counts.reduce(maximum)
