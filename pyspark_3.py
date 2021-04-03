@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     spark = SparkSession\
             .builder\
-            .appName("Number of Airports by Country")\
+            .appName("Airports whose latitude is between [10, 90] and longitude is between [-10, -90]")\
             .getOrCreate()
     
     res = spark.read.option("header", True)\
