@@ -23,7 +23,7 @@ if __name__ == "__main__":
                         .map(lambda x: (x[0], x[1], x[2], x[3], x[4], x[5]))\
                         .filter(selection)
     tuples = res.collect()
-    with open(sys.argv[1], 'w') as csvfile:
+    with open(sys.argv[1], 'w', newline = '') as csvfile:
         csvwriter = csv.writer(csvfile)
         for x in tuples:
             csvwriter.writerow([x[2]])

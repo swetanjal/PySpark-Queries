@@ -16,7 +16,7 @@ if __name__ == "__main__":
                         .map(lambda r: (r[5], 1))
     res = airport_value_keys.reduceByKey(lambda a,b: a+b)
     tuples = res.collect()
-    with open(sys.argv[1], 'w') as csvfile:
+    with open(sys.argv[1], 'w', newline = '') as csvfile:
         csvwriter = csv.writer(csvfile)
         for x in tuples:
             csvwriter.writerow([x[0], x[1]])

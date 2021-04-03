@@ -24,6 +24,6 @@ if __name__ == "__main__":
                         .map(lambda r: (r[5], 1))
     airport_counts = airport_value_keys.reduceByKey(lambda a,b: a+b)
     res = airport_counts.reduce(maximum)
-    with open(sys.argv[1], 'w') as csvfile:
+    with open(sys.argv[1], 'w', newline = '') as csvfile:
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow([res[0]])
