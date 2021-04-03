@@ -1,3 +1,4 @@
+import csv
 import sys
 import pyspark
 from pyspark.sql import SparkSession
@@ -21,5 +22,8 @@ if __name__ == "__main__":
                         .csv("Dataset/airports.csv").rdd\
                         .map(lambda x: (x[0], x[1], x[2], x[3], x[4], x[5]))\
                         .filter(selection)
-    print(res.collect())
-    exit()
+    tuples = res.collect()
+    with open(sys.argv[1], 'w') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        for x in tuples:
+            csvwriter.writerow([x[2]])

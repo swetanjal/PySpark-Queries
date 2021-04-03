@@ -1,3 +1,4 @@
+import csv
 import sys
 import pyspark
 from pyspark.sql import SparkSession
@@ -23,5 +24,6 @@ if __name__ == "__main__":
                         .map(lambda r: (r[5], 1))
     airport_counts = airport_value_keys.reduceByKey(lambda a,b: a+b)
     res = airport_counts.reduce(maximum)
-    print(res[0])
-    exit()
+    with open(sys.argv[1], 'w') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        csvwriter.writerow([res[0]])
